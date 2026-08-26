@@ -1,0 +1,62 @@
+.agendamento {
+  padding-bottom: var(--space-2xl);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-md);
+  max-width: 36rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field span {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-ink-muted);
+}
+
+.field input,
+.field select,
+.field textarea {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
+  background: #fff;
+  color: var(--color-ink);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: 2px solid var(--color-blush);
+  outline-offset: 1px;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (min-width: 640px) {
+  .form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .actions {
+    grid-column: 1 / -1;
+  }
+}

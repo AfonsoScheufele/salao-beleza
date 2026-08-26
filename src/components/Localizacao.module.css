@@ -1,0 +1,72 @@
+.local {
+  padding-bottom: var(--space-2xl);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.info h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.35rem;
+}
+
+.info p {
+  color: var(--color-ink-muted);
+}
+
+.city {
+  margin-bottom: var(--space-lg);
+}
+
+.hoursTitle {
+  margin-top: var(--space-md);
+}
+
+.hours {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+  max-width: 22rem;
+}
+
+.hours li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.95rem;
+}
+
+.map {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 280px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+}
+
+.map iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  border: 0;
+}
+
+@media (min-width: 860px) {
+  .grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: stretch;
+  }
+
+  .map,
+  .map iframe {
+    min-height: 360px;
+    height: 100%;
+  }
+}

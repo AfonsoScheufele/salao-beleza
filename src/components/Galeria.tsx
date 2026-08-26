@@ -1,16 +1,27 @@
-import { useRef, useState } from 'react'
-import { galleryImages } from '../data/content'
-import { useGalleryHover } from '../animations/useMicroAnime'
+import { useMemo } from 'react'
+import { hairStackImages } from '../data/content'
 import { useScrollReveal } from '../animations/useScrollReveal'
+import Stack from './Stack'
 import styles from './Galeria.module.css'
 
 export function Galeria() {
   const sectionRef = useScrollReveal({
-    childSelector: '.section__eyebrow, .section__title, .section__lead',
+    childSelector: '.section__eyebrow, .section__title, .section__lead, [data-reveal]',
   })
-  const gridRef = useRef<HTMLDivElement | null>(null)
-  useGalleryHover(gridRef)
-  const [lightbox, setLightbox] = useState<string | null>(null)
+
+  const stackCards = useMemo(
+    () =>
+      hairStackImages.map((img) => (
+        <img
+          key={img.src}
+          src={img.src}
+          alt={img.alt}
+          className="card-image"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+      )),
+    [],
+  )
 
   return (
     <section id="galeria" className={`section ${styles.galeria}`} ref={sectionRef}>
@@ -18,40 +29,25 @@ export function Galeria() {
         <p className="section__eyebrow">Portfólio</p>
         <h2 className="section__title">Galeria</h2>
         <p className="section__lead">
-          Trabalhos realizados no salão — cortes, coloração e tratamentos.
+          Fotos de cabelo — arraste ou toque para ver o próximo trabalho.
         </p>
 
-        <div className={styles.grid} ref={gridRef}>
-          {galleryImages.map((img) => (
-            <button
-              key={img.src}
-              type="button"
-              className={styles.item}
-              data-gallery-item
-              onClick={() => setLightbox(img.src)}
-              aria-label={`Ampliar: ${img.alt}`}
-            >
-              <img src={img.src} alt={img.alt} loading="lazy" />
-            </button>
-          ))}
+        <div className={styles.stackWrap} data-reveal>
+          <div className={styles.stackStage}>
+            <Stack
+              cards={stackCards}
+              randomRotation
+              sensitivity={180}
+              sendToBackOnClick
+              autoplay
+              autoplayDelay={3500}
+              pauseOnHover
+              mobileClickOnly
+            />
+          </div>
+          <p className={styles.stackHint}>Arraste, clique ou espere — as fotos se revezam</p>
         </div>
       </div>
-
-      {lightbox && (
-        <div
-          className={styles.lightbox}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Foto ampliada"
-          onClick={() => setLightbox(null)}
-          onKeyDown={(e) => e.key === 'Escape' && setLightbox(null)}
-        >
-          <img src={lightbox} alt="" />
-          <button type="button" className={styles.close} aria-label="Fechar">
-            Fechar
-          </button>
-        </div>
-      )}
     </section>
   )
 }

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#241c20"/>
+      <stop offset="0.45" stop-color="#3a2f2c"/>
+      <stop offset="1" stop-color="#5a4540"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="800" cy="380" r="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E8B4B8" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#E8B4B8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <!-- Marca tipográfica desenhada (não depende de fonte do sistema no <img>) -->
+  <g fill="#FFF8F5">
+    <!-- Ampersand estilizado no centro -->
+    <text x="800" y="470" text-anchor="middle" font-size="220" font-family="serif" font-style="italic" fill="#E8D5B5">&amp;</text>
+  </g>
+  <circle cx="800" cy="450" r="210" stroke="#C9A96E" stroke-opacity="0.35" stroke-width="2" fill="none"/>
+  <circle cx="800" cy="450" r="230" stroke="#E8B4B8" stroke-opacity="0.18" stroke-width="1" fill="none"/>
+</svg>

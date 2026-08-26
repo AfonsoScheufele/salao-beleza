@@ -14,32 +14,124 @@
 }
 
 .field {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
 
-.field span {
+.field > span:first-child {
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--color-ink-muted);
 }
 
 .field input,
-.field select,
 .field textarea {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: 0.75rem 0.85rem;
   background: #fff;
   color: var(--color-ink);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #a8999f;
 }
 
 .field input:focus,
-.field select:focus,
 .field textarea:focus {
-  outline: 2px solid var(--color-blush);
-  outline-offset: 1px;
+  outline: none;
+  border-color: var(--color-blush);
+  box-shadow: 0 0 0 3px rgba(232, 180, 184, 0.35);
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--color-ink-muted);
+  opacity: 0.85;
+}
+
+.selectTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
+  background: #fff;
+  color: var(--color-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.selectTrigger:hover,
+.selectTrigger:focus-visible {
+  outline: none;
+  border-color: var(--color-blush);
+  box-shadow: 0 0 0 3px rgba(232, 180, 184, 0.35);
+}
+
+.selectOpen {
+  border-color: var(--color-blush);
+  box-shadow: 0 0 0 3px rgba(232, 180, 184, 0.35);
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--color-ink-muted);
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.selectList {
+  position: absolute;
+  z-index: 8;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  max-height: 14rem;
+  overflow-y: auto;
+}
+
+.selectOption {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 0.7rem 0.8rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.selectOption:hover,
+.selectOption:focus-visible {
+  outline: none;
+  background: rgba(232, 180, 184, 0.18);
+}
+
+.selectOptionActive {
+  background: rgba(232, 180, 184, 0.28);
+  color: var(--color-blush-deep);
+  font-weight: 500;
 }
 
 .full {

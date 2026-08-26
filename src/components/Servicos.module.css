@@ -32,13 +32,6 @@
   font-size: 0.95rem;
 }
 
-.price {
-  font-weight: 500;
-  color: var(--color-champagne);
-  font-size: 0.95rem;
-  margin-top: 0.35rem;
-}
-
 @media (min-width: 640px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);

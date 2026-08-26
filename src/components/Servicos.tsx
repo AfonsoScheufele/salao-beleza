@@ -16,8 +16,7 @@ export function Servicos() {
         <p className="section__eyebrow">O que fazemos</p>
         <h2 className="section__title">Serviços</h2>
         <p className="section__lead">
-          Valores aproximados — confirme o orçamento no agendamento conforme o comprimento e a
-          complexidade.
+          Confira nossos serviços — valores e detalhes pelo WhatsApp no agendamento.
         </p>
 
         <motion.ul
@@ -31,7 +30,6 @@ export function Servicos() {
             <motion.li key={service.id} className={styles.card} variants={variants}>
               <h3>{service.name}</h3>
               <p>{service.description}</p>
-              <span className={styles.price}>{service.priceFrom}</span>
             </motion.li>
           ))}
         </motion.ul>

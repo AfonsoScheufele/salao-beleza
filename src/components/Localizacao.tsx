@@ -20,7 +20,10 @@ export function Localizacao() {
           <div className={styles.info} data-reveal>
             <h3>Endereço</h3>
             <p>{site.address.line}</p>
-            <p className={styles.city}>{site.address.city}</p>
+            <p className={styles.city}>
+              {site.address.city}
+              {site.address.cep ? ` · CEP ${site.address.cep}` : ''}
+            </p>
 
             <h3 className={styles.hoursTitle}>Horário de funcionamento</h3>
             <ul className={styles.hours}>

@@ -39,29 +39,39 @@
   color: var(--color-ink-muted);
 }
 
-.cert {
+.certs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+  width: 100%;
+}
+
+.certsLabel {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-ink-muted);
   margin: 0;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 200px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-soft);
-  background: var(--color-surface);
-}
-
-.cert img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.cert figcaption {
-  padding: 0.85rem 1rem;
-  font-size: 0.85rem;
-  color: var(--color-ink-muted);
 }
 
 @media (min-width: 900px) {
   .grid {
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: 1fr 1.05fr;
     gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .slider {
+    min-height: 280px;
   }
 }

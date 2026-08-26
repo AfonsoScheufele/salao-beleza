@@ -40,6 +40,7 @@
 
 html {
   scroll-behavior: smooth;
+  max-width: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -60,6 +61,17 @@ body {
   background-attachment: fixed;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  max-width: 100%;
+}
+
+/* Evita scroll lateral sem quebrar position:sticky do hero */
+#root {
+  max-width: 100%;
+}
+
+main > section:not(#topo) {
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 img {
@@ -94,6 +106,8 @@ p {
 
 .section {
   padding: var(--space-xl) var(--space-md);
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .section__inner {

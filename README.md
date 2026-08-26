@@ -23,11 +23,11 @@ Tudo centralizado em [`src/data/content.ts`](src/data/content.ts):
 - Nome do salão (`site.name`)
 - WhatsApp (`site.whatsapp`)
 - E-mail, Instagram, endereço e horário
-- Serviços e faixas de preço
-- Equipe (nomes e fotos)
-- Lista da galeria
+- Serviços (sem preços — consulte pelo WhatsApp)
+- Profissional
+- Lista da galeria (fotos de cabelo)
 
-Fotos ficam em `public/images/` (`hero-*.jpg`, `gallery-*.jpg`, `team-*.jpg`, `certificado-olenka.jpg`).
+Fotos ficam em `public/images/` (`hero-*.jpg`, `gallery-*.jpg`, `certificado-olenka.jpg`).
 
 Originais / ZIPs permanecem em `fotos/` (não entram no build).
 
@@ -36,7 +36,7 @@ Originais / ZIPs permanecem em `fotos/` (não entram no build).
 | Lib | Uso |
 |-----|-----|
 | GSAP + ScrollTrigger | Reveals no scroll e parallax do hero |
-| Motion (`motion/react`) | Entrada staggered de serviços, equipe e form |
+| Motion (`motion/react`) | Entrada staggered de serviços, profissional e form |
 | Anime.js | Pulse do WhatsApp flutuante, hover da galeria, stagger do menu |
 
 ## Contato atual

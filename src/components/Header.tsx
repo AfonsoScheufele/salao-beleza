@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { navLinks, site, whatsappUrl } from '../data/content'
+import { navLinks, whatsappUrl } from '../data/content'
 import { useNavStagger } from '../animations/useMicroAnime'
+import { BrandMark } from './BrandMark'
 import styles from './Header.module.css'
 
 export function Header() {
@@ -27,7 +28,7 @@ export function Header() {
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
         <a href="#topo" className={styles.brand} onClick={() => setOpen(false)}>
-          {site.name}
+          <BrandMark variant="header" />
         </a>
 
         <button

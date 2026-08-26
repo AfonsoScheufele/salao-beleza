@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { services, whatsappUrl } from '../data/content'
 import { blockContainer, blockItem, reducedMotionVariants } from '../animations/blockMotion'
@@ -19,17 +19,48 @@ const initial: FormState = {
   mensagem: '',
 }
 
+/** Mantém só dígitos e formata como DD/MM/AAAA */
+function maskDate(value: string) {
+  const digits = value.replace(/\D/g, '').slice(0, 8)
+  if (digits.length <= 2) return digits
+  if (digits.length <= 4) return `${digits.slice(0, 2)}/${digits.slice(2)}`
+  return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`
+}
+
 export function Agendamento() {
   const ref = useScrollReveal({
     childSelector: '.section__eyebrow, .section__title, .section__lead',
   })
   const [form, setForm] = useState<FormState>(initial)
+  const [openSelect, setOpenSelect] = useState(false)
+  const selectRef = useRef<HTMLDivElement | null>(null)
+  const listId = useId()
   const reduce = useReducedMotion()
   const variants = reduce ? reducedMotionVariants : blockItem
   const container = reduce ? reducedMotionVariants : blockContainer
 
+  useEffect(() => {
+    if (!openSelect) return
+    const onPointer = (e: MouseEvent) => {
+      if (!selectRef.current?.contains(e.target as Node)) setOpenSelect(false)
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenSelect(false)
+    }
+    document.addEventListener('mousedown', onPointer)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onPointer)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [openSelect])
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
+    if (!form.servico) {
+      setOpenSelect(true)
+      return
+    }
     const text = [
       'Olá! Gostaria de agendar um horário.',
       `Nome: ${form.nome}`,
@@ -72,33 +103,57 @@ export function Agendamento() {
             />
           </motion.label>
 
-          <motion.label className={styles.field} variants={variants}>
-            <span>Serviço</span>
-            <select
-              name="servico"
-              value={form.servico}
-              onChange={(e) => setForm((f) => ({ ...f, servico: e.target.value }))}
-              required
+          <motion.div className={styles.field} variants={variants} ref={selectRef}>
+            <span id={`${listId}-label`}>Serviço</span>
+            <input type="hidden" name="servico" value={form.servico} />
+            <button
+              type="button"
+              className={`${styles.selectTrigger} ${!form.servico ? styles.placeholder : ''} ${openSelect ? styles.selectOpen : ''}`}
+              aria-haspopup="listbox"
+              aria-expanded={openSelect}
+              aria-labelledby={`${listId}-label`}
+              aria-controls={listId}
+              onClick={() => setOpenSelect((v) => !v)}
             >
-              <option value="" disabled>
-                Selecione
-              </option>
-              {services.map((s) => (
-                <option key={s.id} value={s.name}>
-                  {s.name}
-                </option>
-              ))}
-            </select>
-          </motion.label>
+              <span>{form.servico || 'Selecione o serviço'}</span>
+              <Chevron open={openSelect} />
+            </button>
+            {openSelect && (
+              <ul id={listId} className={styles.selectList} role="listbox" aria-labelledby={`${listId}-label`}>
+                {services.map((s) => (
+                  <li key={s.id} role="option" aria-selected={form.servico === s.name}>
+                    <button
+                      type="button"
+                      className={`${styles.selectOption} ${form.servico === s.name ? styles.selectOptionActive : ''}`}
+                      onClick={() => {
+                        setForm((f) => ({ ...f, servico: s.name }))
+                        setOpenSelect(false)
+                      }}
+                    >
+                      {s.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </motion.div>
 
           <motion.label className={styles.field} variants={variants}>
             <span>Data preferida</span>
             <input
-              type="date"
+              type="text"
               name="data"
+              inputMode="numeric"
+              autoComplete="off"
+              placeholder="DD/MM/AAAA"
               value={form.data}
-              onChange={(e) => setForm((f) => ({ ...f, data: e.target.value }))}
+              onChange={(e) => setForm((f) => ({ ...f, data: maskDate(e.target.value) }))}
+              maxLength={10}
+              aria-describedby={`${listId}-date-hint`}
             />
+            <small id={`${listId}-date-hint`} className={styles.hint}>
+              Ex.: 15/09/2026
+            </small>
           </motion.label>
 
           <motion.label className={`${styles.field} ${styles.full}`} variants={variants}>
@@ -120,5 +175,26 @@ export function Agendamento() {
         </motion.form>
       </div>
     </section>
+  )
+}
+
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      className={`${styles.chevron} ${open ? styles.chevronOpen : ''}`}
+      viewBox="0 0 20 20"
+      width="18"
+      height="18"
+      aria-hidden="true"
+      fill="none"
+    >
+      <path
+        d="M5 7.5L10 12.5L15 7.5"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   )
 }

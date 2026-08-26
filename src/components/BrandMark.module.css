@@ -1,0 +1,77 @@
+.mark {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  line-height: 1.05;
+  color: inherit;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+
+.dot {
+  opacity: 0.5;
+}
+
+.title {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+.amp {
+  font-style: normal;
+  font-weight: 500;
+  opacity: 0.7;
+  font-size: 0.85em;
+}
+
+/* Header — compacto */
+.header .title {
+  font-size: clamp(1.15rem, 2.8vw, 1.45rem);
+}
+
+.header .meta {
+  font-size: 0.55rem;
+}
+
+/* Footer */
+.footer .title {
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-style: italic;
+}
+
+.footer .meta {
+  font-size: 0.7rem;
+  opacity: 0.65;
+}
+
+/* Hero */
+.hero {
+  align-items: center;
+  text-align: center;
+}
+
+.hero .title {
+  font-size: clamp(2.4rem, 8vw, 4.5rem);
+  justify-content: center;
+}
+
+.hero .meta {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  justify-content: center;
+}

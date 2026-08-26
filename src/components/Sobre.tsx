@@ -1,4 +1,5 @@
-import { about } from '../data/content'
+import MorphSlider from './MorphSlider'
+import { about, certificates } from '../data/content'
 import { useScrollReveal } from '../animations/useScrollReveal'
 import styles from './Sobre.module.css'
 
@@ -9,7 +10,7 @@ export function Sobre() {
     <section id="sobre" className={`section ${styles.sobre}`} ref={ref}>
       <div className="section__inner">
         <p className="section__eyebrow" data-reveal>
-          Quem somos
+          Conheça o espaço
         </p>
         <h2 className="section__title" data-reveal>
           {about.title}
@@ -34,10 +35,22 @@ export function Sobre() {
             </ul>
           </div>
 
-          <figure className={styles.cert} data-reveal>
-            <img src={about.certificateImage} alt={about.certificateAlt} />
-            <figcaption>Qualificação profissional — Blond Influence (Olenka)</figcaption>
-          </figure>
+          <div className={styles.certs} data-reveal>
+            <p className={styles.certsLabel}>Certificados e formações</p>
+            <div className={styles.slider}>
+              <MorphSlider
+                items={[...certificates]}
+                transition="melt"
+                intensity={0.45}
+                aberration={0.25}
+                drift={0.25}
+                autoplay
+                autoplayDelay={4.5}
+                radius={14}
+                overlayColor="#1a1418"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

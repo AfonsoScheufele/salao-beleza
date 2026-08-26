@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react'
-import { team } from '../data/content'
+import { owner } from '../data/content'
 import { blockContainer, blockItem, reducedMotionVariants } from '../animations/blockMotion'
 import { useScrollReveal } from '../animations/useScrollReveal'
 import styles from './Equipe.module.css'
@@ -13,32 +13,32 @@ export function Equipe() {
   const container = reduce ? reducedMotionVariants : blockContainer
 
   return (
-    <section id="equipe" className={`section ${styles.equipe}`} ref={ref}>
+    <section id="profissional" className={`section ${styles.equipe}`} ref={ref}>
       <div className="section__inner">
         <p className="section__eyebrow">Quem cuida de você</p>
-        <h2 className="section__title">Equipe</h2>
+        <h2 className="section__title">Profissional</h2>
         <p className="section__lead">
-          Profissionais dedicados — atualize nomes e fotos em{' '}
-          <code>src/data/content.ts</code>.
+          Conheça quem vai cuidar do seu cabelo no Charme & Beleza.
         </p>
 
-        <motion.ul
-          className={styles.grid}
+        <motion.div
+          className={styles.single}
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
         >
-          {team.map((member) => (
-            <motion.li key={member.name} className={styles.member} variants={variants}>
-              <div className={styles.photo}>
-                <img src={member.photo} alt={member.name} loading="lazy" />
-              </div>
-              <h3>{member.name}</h3>
-              <p>{member.role}</p>
-            </motion.li>
-          ))}
-        </motion.ul>
+          <motion.article className={styles.member} variants={variants}>
+            <div className={styles.photo}>
+              <img src={owner.photo} alt={owner.name} loading="lazy" />
+            </div>
+            <div className={styles.info}>
+              <h3>{owner.name}</h3>
+              <p className={styles.role}>{owner.role}</p>
+              <p className={styles.bio}>{owner.bio}</p>
+            </div>
+          </motion.article>
+        </motion.div>
       </div>
     </section>
   )

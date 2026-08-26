@@ -19,12 +19,11 @@ const initial: FormState = {
   mensagem: '',
 }
 
-/** Mantém só dígitos e formata como DD/MM/AAAA */
-function maskDate(value: string) {
-  const digits = value.replace(/\D/g, '').slice(0, 8)
-  if (digits.length <= 2) return digits
-  if (digits.length <= 4) return `${digits.slice(0, 2)}/${digits.slice(2)}`
-  return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`
+/** Converte YYYY-MM-DD (input date) para DD/MM/AAAA */
+function formatDateBr(iso: string) {
+  if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return iso
+  const [y, m, d] = iso.split('-')
+  return `${d}/${m}/${y}`
 }
 
 export function Agendamento() {
@@ -34,6 +33,7 @@ export function Agendamento() {
   const [form, setForm] = useState<FormState>(initial)
   const [openSelect, setOpenSelect] = useState(false)
   const selectRef = useRef<HTMLDivElement | null>(null)
+  const dateRef = useRef<HTMLInputElement | null>(null)
   const listId = useId()
   const reduce = useReducedMotion()
   const variants = reduce ? reducedMotionVariants : blockItem
@@ -65,13 +65,23 @@ export function Agendamento() {
       'Olá! Gostaria de agendar um horário.',
       `Nome: ${form.nome}`,
       form.servico ? `Serviço: ${form.servico}` : null,
-      form.data ? `Data preferida: ${form.data}` : null,
+      form.data ? `Data preferida: ${formatDateBr(form.data)}` : null,
       form.mensagem ? `Mensagem: ${form.mensagem}` : null,
     ]
       .filter(Boolean)
       .join('\n')
 
     window.open(whatsappUrl(text), '_blank', 'noopener,noreferrer')
+  }
+
+  const openDatePicker = () => {
+    const el = dateRef.current
+    if (!el) return
+    try {
+      el.showPicker?.()
+    } catch {
+      el.focus()
+    }
   }
 
   return (
@@ -138,23 +148,29 @@ export function Agendamento() {
             )}
           </motion.div>
 
-          <motion.label className={styles.field} variants={variants}>
-            <span>Data preferida</span>
-            <input
-              type="text"
-              name="data"
-              inputMode="numeric"
-              autoComplete="off"
-              placeholder="DD/MM/AAAA"
-              value={form.data}
-              onChange={(e) => setForm((f) => ({ ...f, data: maskDate(e.target.value) }))}
-              maxLength={10}
-              aria-describedby={`${listId}-date-hint`}
-            />
-            <small id={`${listId}-date-hint`} className={styles.hint}>
-              Ex.: 15/09/2026
-            </small>
-          </motion.label>
+          <motion.div className={`${styles.field} ${styles.full}`} variants={variants}>
+            <span id={`${listId}-date-label`}>Data preferida</span>
+            <div className={styles.dateWrap}>
+              <input
+                ref={dateRef}
+                type="date"
+                name="data"
+                className={`${styles.dateInput} ${!form.data ? styles.dateEmpty : ''}`}
+                value={form.data}
+                onChange={(e) => setForm((f) => ({ ...f, data: e.target.value }))}
+                aria-labelledby={`${listId}-date-label`}
+                min={new Date().toISOString().slice(0, 10)}
+              />
+              <button
+                type="button"
+                className={styles.dateBtn}
+                onClick={openDatePicker}
+                aria-label="Abrir calendário"
+              >
+                <CalendarIcon />
+              </button>
+            </div>
+          </motion.div>
 
           <motion.label className={`${styles.field} ${styles.full}`} variants={variants}>
             <span>Mensagem</span>
@@ -195,6 +211,16 @@ function Chevron({ open }: { open: boolean }) {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+    </svg>
+  )
+}
+
+function CalendarIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none">
+      <rect x="3.5" y="5" width="17" height="15" rx="2.5" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M3.5 9.5h17" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M8 3.5v3M16 3.5v3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
     </svg>
   )
 }

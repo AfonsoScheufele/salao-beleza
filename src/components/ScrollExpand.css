@@ -29,7 +29,7 @@
   min-height: 100svh;
   height: 100svh;
   overflow: hidden;
-  background: #2a2220;
+  background: var(--color-hero-bg);
   --se-title-size: 4rem;
 }
 
@@ -40,7 +40,7 @@
   height: 100%;
   clip-path: inset(21% 29% 21% 29% round 24px);
   will-change: clip-path;
-  background: #2a2220;
+  background: var(--color-hero-bg);
 }
 
 .scroll-expand__media {
@@ -59,11 +59,25 @@
   display: block;
 }
 
+.scroll-expand__media--empty {
+  background: linear-gradient(
+    165deg,
+    var(--color-hero-bg) 0%,
+    var(--color-hero-bg-mid) 55%,
+    var(--color-hero-bg) 100%
+  );
+}
+
 .scroll-expand__scrim {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.1) 45%, rgba(0, 0, 0, 0.35));
+  background: linear-gradient(
+    to top,
+    var(--color-hero-scrim),
+    rgba(40, 30, 42, 0.14) 45%,
+    rgba(40, 30, 42, 0.42)
+  );
   opacity: 0;
 }
 

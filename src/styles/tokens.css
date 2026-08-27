@@ -13,6 +13,11 @@
   --color-border: rgba(42, 34, 38, 0.1);
   --color-whatsapp: #25d366;
 
+  /* Hero — escuro com tom mauve, combina com blush/champagne */
+  --color-hero-bg: #281e28;
+  --color-hero-bg-mid: #362a38;
+  --color-hero-scrim: rgba(40, 30, 42, 0.88);
+
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Outfit', system-ui, sans-serif;
 

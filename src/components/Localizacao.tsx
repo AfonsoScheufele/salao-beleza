@@ -9,31 +9,21 @@ export function Localizacao() {
   return (
     <section id="localizacao" className={`section ${styles.local}`} ref={ref}>
       <div className="section__inner">
-        <p className="section__eyebrow" data-reveal>
-          Onde estamos
-        </p>
-        <h2 className="section__title" data-reveal>
-          Localização e horário
-        </h2>
-
         <div className={styles.grid}>
           <div className={styles.info} data-reveal>
-            <h3>Endereço</h3>
-            <p>{site.address.line}</p>
-            <p className={styles.city}>
-              {site.address.city}
-              {site.address.cep ? ` · CEP ${site.address.cep}` : ''}
-            </p>
+            <header className={styles.header}>
+              <p className="section__eyebrow">Onde estamos</p>
+              <h2 className="section__title">Localização</h2>
+            </header>
 
-            <h3 className={styles.hoursTitle}>Horário de funcionamento</h3>
-            <ul className={styles.hours}>
-              {site.hours.map((row) => (
-                <li key={row.days}>
-                  <span>{row.days}</span>
-                  <span>{row.time}</span>
-                </li>
-              ))}
-            </ul>
+            <div className={styles.address}>
+              <h3>Endereço</h3>
+              <p>{site.address.line}</p>
+              <p className={styles.city}>
+                {site.address.city}
+                {site.address.cep ? ` · CEP ${site.address.cep}` : ''}
+              </p>
+            </div>
           </div>
 
           <div className={styles.map} data-reveal>

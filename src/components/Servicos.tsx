@@ -1,5 +1,5 @@
 import { useReducedMotion, motion } from 'motion/react'
-import { services } from '../data/content'
+import { services, serviceNotice } from '../data/content'
 import { blockContainer, blockItem, reducedMotionVariants } from '../animations/blockMotion'
 import { useScrollReveal } from '../animations/useScrollReveal'
 import styles from './Servicos.module.css'
@@ -18,6 +18,10 @@ export function Servicos() {
         <p className="section__lead">
           Confira nossos serviços — valores e detalhes pelo WhatsApp no agendamento.
         </p>
+
+        <div className={styles.notice} role="note">
+          <strong>{serviceNotice.title}:</strong> {serviceNotice.text}
+        </div>
 
         <motion.ul
           className={styles.grid}

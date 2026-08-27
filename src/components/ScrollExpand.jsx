@@ -60,7 +60,7 @@ const ScrollExpand = ({
   const applyProgress = useCallback((p) => {
     const frame = frameRef.current
     const media = mediaRef.current
-    if (!frame || !media) return
+    if (!frame) return
     const c = propsRef.current
 
     const e = p >= 0.98 ? 1 : smoothstep(0, 1, p)
@@ -72,10 +72,14 @@ const ScrollExpand = ({
     const r = c.startRadius + (c.endRadius - c.startRadius) * e
     frame.style.clipPath = `inset(${iy}% ${ix}% ${iy}% ${ix}% round ${r}px)`
 
-    media.style.transform = `scale(${c.mediaZoom + (1 - c.mediaZoom) * e})`
-    media.style.width = '100%'
-    media.style.height = '100%'
-    media.style.objectFit = 'cover'
+    if (media) {
+      media.style.transform = `scale(${c.mediaZoom + (1 - c.mediaZoom) * e})`
+      media.style.width = '100%'
+      media.style.height = '100%'
+      if (media.tagName === 'IMG' || media.tagName === 'VIDEO') {
+        media.style.objectFit = 'cover'
+      }
+    }
 
     if (scrimRef.current) scrimRef.current.style.opacity = `${c.overlayScrim * e}`
 
@@ -192,8 +196,11 @@ const ScrollExpand = ({
     }
   }, [applyProgress, useWindowScroll])
 
-  const media =
-    mediaType === 'video' ? (
+  const hasMedia = Boolean(src)
+
+  const media = !hasMedia ? (
+    <div ref={mediaRef} className="scroll-expand__media scroll-expand__media--empty" aria-hidden="true" />
+  ) : mediaType === 'video' ? (
       <video
         ref={mediaRef}
         className="scroll-expand__media"

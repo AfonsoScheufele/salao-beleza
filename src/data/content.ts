@@ -4,8 +4,8 @@ export const site = {
   /** Nome curto (wordmark) */
   name: 'Charme & Beleza',
   /** Nome completo da fachada */
-  fullName: 'Salão Unissex Charme & Beleza',
-  category: 'Salão Unissex',
+  fullName: 'Salão Charme & Beleza',
+  category: 'Salão de Beleza',
   tagline: 'Atendimento personalizado, com técnica e carinho.',
   heroHeadline: 'Seu momento de brilhar',
   heroSupport:
@@ -51,7 +51,7 @@ export const navLinks = [
 export const about = {
   title: 'Sobre o salão',
   story:
-    'O Salão Unissex Charme & Beleza é um espaço acolhedor em Concórdia, pensado para você se sentir à vontade do primeiro contato ao resultado final.',
+    'O Salão Charme & Beleza é um espaço acolhedor em Concórdia, pensado para você se sentir à vontade do primeiro contato ao resultado final.',
   mission:
     'Oferecer cuidado próximo e resultados que valorizam o seu estilo, com produtos profissionais e técnicas atualizadas.',
   differentials: [
@@ -96,12 +96,12 @@ export const services: Service[] = [
   {
     id: 'corte',
     name: 'Corte',
-    description: 'Corte feminino ou masculino com finalização.',
+    description: 'Corte feminino com finalização.',
   },
   {
     id: 'coloracao',
     name: 'Coloração',
-    description: 'Cor, mechas, loiros e correções com técnica profissional.',
+    description: 'Cor, mechas, correções com técnica profissional.',
   },
   {
     id: 'tratamento',
@@ -127,10 +127,16 @@ export const hairStackImages = [
   { src: '/images/gallery-14.jpg', alt: 'Loiro longo alisado' },
   { src: '/images/gallery-16.jpg', alt: 'Cabelo longo castanho avermelhado' },
   { src: '/images/gallery-18.jpg', alt: 'Corte médio com mechas loiras' },
-  { src: '/images/gallery-20.jpg', alt: 'Bob com loiro platinado' },
   { src: '/images/gallery-24.jpg', alt: 'Loiro longo em V' },
   { src: '/images/gallery-28.jpg', alt: 'Loiro acinzentado longo' },
+  { src: '/images/gallery-20.jpg', alt: 'Bob com loiro platinado' },
 ] as const
+
+/** Aviso exibido na seção de serviços */
+export const serviceNotice = {
+  title: 'Observação',
+  text: 'Não realizamos serviços para cabelos cacheados.',
+} as const
 
 /** Profissional do salão */
 export const owner = {

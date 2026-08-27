@@ -17,13 +17,6 @@ export function Footer() {
           <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
             WhatsApp {site.whatsapp.display}
           </a>
-          <a href={`tel:+${site.phone.e164}`}>Telefone {site.phone.display}</a>
-          <a href={`mailto:${site.email}`}>{site.email}</a>
-          {site.instagram !== '#' && (
-            <a href={site.instagram} target="_blank" rel="noopener noreferrer">
-              Instagram
-            </a>
-          )}
         </div>
       </div>
       <p className={styles.copy}>

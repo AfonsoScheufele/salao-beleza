@@ -6,7 +6,7 @@
  */
 export const siteUrl =
   (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, '') ||
-  'https://salao-beleza.vercel.app'
+  'https://charme-beleza.vercel.app'
 
 export const site = {
   /** Nome curto (wordmark) */

@@ -1,6 +1,6 @@
 # Charme & Beleza — Landing page
 
-Site no ar: [https://salao-beleza.vercel.app](https://salao-beleza.vercel.app)
+Site no ar: [https://charme-beleza.vercel.app](https://charme-beleza.vercel.app)
 
 ## Como rodar local
 
@@ -22,11 +22,11 @@ A pasta `dist/` é o site pronto para hospedar.
 
 Já configurado com `vercel.json` (build `npm run build`, output `dist`).
 
-URL padrão de SEO/meta: `https://salao-beleza.vercel.app`  
-Para mudar: variável de ambiente `VITE_SITE_URL` no painel da Vercel e novo deploy.
+URL pública: `https://charme-beleza.vercel.app`  
+Para mudar: variável `VITE_SITE_URL` no painel da Vercel e novo deploy.
 
 ## Google Search Console
 
-1. Adicione a propriedade: `https://salao-beleza.vercel.app`
+1. Adicione: `https://charme-beleza.vercel.app`
 2. Peça indexação da URL `/`
-3. Envie o sitemap: `https://salao-beleza.vercel.app/sitemap.xml`
+3. Sitemap: `https://charme-beleza.vercel.app/sitemap.xml`

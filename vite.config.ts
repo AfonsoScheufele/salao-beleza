@@ -42,7 +42,7 @@ function siteMetaPlugin(siteUrl: string): Plugin {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '')
-  const siteUrl = (env.VITE_SITE_URL || 'https://salao-beleza.vercel.app').replace(/\/$/, '')
+  const siteUrl = (env.VITE_SITE_URL || 'https://charme-beleza.vercel.app').replace(/\/$/, '')
 
   return {
     plugins: [react(), siteMetaPlugin(siteUrl)],

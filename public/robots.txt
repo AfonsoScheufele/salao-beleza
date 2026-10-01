@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://salao-beleza.vercel.app/sitemap.xml
+Sitemap: https://charme-beleza.vercel.app/sitemap.xml

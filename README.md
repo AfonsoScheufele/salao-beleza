@@ -1,5 +1,7 @@
 # Charme & Beleza — Landing page
 
+Site no ar: [https://salao-beleza.vercel.app](https://salao-beleza.vercel.app)
+
 ## Como rodar local
 
 ```bash
@@ -16,16 +18,15 @@ npm run preview
 
 A pasta `dist/` é o site pronto para hospedar.
 
-## Domínio e Google
+## Deploy (Vercel)
 
-1. **Compre o domínio** (ex.: Registro.br) — o padrão no projeto é `https://charmeebeleza.com.br`.
-2. **Ajuste a URL** (se for outra):
-   - copie `.env.example` → `.env` e edite `VITE_SITE_URL`
-   - ou altere o fallback em `vite.config.ts` e `src/data/content.ts`
-3. **Publique** (escolha uma):
-   - [Vercel](https://vercel.com): importe o repo → Build `npm run build` → Output `dist` → Add Domain
-   - [Netlify](https://netlify.com): mesmo fluxo (`netlify.toml` já configura)
-   - [Cloudflare Pages](https://pages.cloudflare.com): Build `npm run build` → Output `dist`
-4. **Google Search Console**: adicione a propriedade do domínio → peça indexação da URL `/` → envie o sitemap `https://SEU-DOMINIO/sitemap.xml`
+Já configurado com `vercel.json` (build `npm run build`, output `dist`).
 
-O build gera `robots.txt`, `sitemap.xml` e meta Open Graph com a URL correta.
+URL padrão de SEO/meta: `https://salao-beleza.vercel.app`  
+Para mudar: variável de ambiente `VITE_SITE_URL` no painel da Vercel e novo deploy.
+
+## Google Search Console
+
+1. Adicione a propriedade: `https://salao-beleza.vercel.app`
+2. Peça indexação da URL `/`
+3. Envie o sitemap: `https://salao-beleza.vercel.app/sitemap.xml`

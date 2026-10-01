@@ -2,14 +2,11 @@
 
 /**
  * URL pública do site (sem barra no final).
- * Ao comprar o domínio, atualize aqui e também em:
- * - index.html (%SITE_URL% é trocado no build; altere o fallback no vite.config)
- * - public/robots.txt
- * - public/sitemap.xml
+ * Padrão: deploy na Vercel. Sobrescreva com VITE_SITE_URL se mudar.
  */
 export const siteUrl =
   (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, '') ||
-  'https://charmeebeleza.com.br'
+  'https://salao-beleza.vercel.app'
 
 export const site = {
   /** Nome curto (wordmark) */

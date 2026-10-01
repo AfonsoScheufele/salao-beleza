@@ -1,5 +1,16 @@
 /** Conteúdo editável do site — altere aqui nome, contatos e imagens. */
 
+/**
+ * URL pública do site (sem barra no final).
+ * Ao comprar o domínio, atualize aqui e também em:
+ * - index.html (%SITE_URL% é trocado no build; altere o fallback no vite.config)
+ * - public/robots.txt
+ * - public/sitemap.xml
+ */
+export const siteUrl =
+  (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, '') ||
+  'https://charmeebeleza.com.br'
+
 export const site = {
   /** Nome curto (wordmark) */
   name: 'Charme & Beleza',
@@ -10,6 +21,11 @@ export const site = {
   heroHeadline: 'Seu momento de brilhar',
   heroSupport:
     'Cortes, coloração e tratamentos feitos sob medida, com o cuidado de quem ama o que faz.',
+  /** Descrição para Google / compartilhamento */
+  seoDescription:
+    'Salão Charme & Beleza — Virlene, em Concórdia/SC. Cortes, coloração e tratamentos. Agende pelo WhatsApp.',
+  /** Imagem de compartilhamento (Open Graph) — caminho absoluto no site */
+  ogImage: '/images/hero-01.jpg',
   whatsapp: {
     display: '(49) 98815-7650',
     e164: '5549988157650',
@@ -23,6 +39,8 @@ export const site = {
   address: {
     line: 'R. Augusto Sette, 306 — Industriários',
     city: 'Concórdia - SC',
+    locality: 'Concórdia',
+    region: 'SC',
     cep: '89705-056',
     mapsQuery: 'R. Augusto Sette, 306, Industriários, Concórdia - SC, 89705-056',
   },

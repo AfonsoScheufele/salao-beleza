@@ -5,7 +5,8 @@ import Stack from './Stack'
 import CircularGallery from './CircularGallery'
 import styles from './Galeria.module.css'
 
-const DESKTOP_BREAKPOINT = 768
+/** Alinha com o breakpoint do header (≥900px = nav desktop / galeria WebGL) */
+const DESKTOP_BREAKPOINT = 900
 
 function useIsDesktop(breakpoint = DESKTOP_BREAKPOINT) {
   const [isDesktop, setIsDesktop] = useState(

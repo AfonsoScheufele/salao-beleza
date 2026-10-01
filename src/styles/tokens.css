@@ -45,6 +45,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 0.75rem);
   max-width: 100%;
 }
 
@@ -67,6 +68,13 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   max-width: 100%;
+}
+
+/* Evita jank de background-attachment:fixed no iOS / mobile */
+@media (max-width: 899px) {
+  body {
+    background-attachment: scroll;
+  }
 }
 
 /* Evita scroll lateral sem quebrar position:sticky do hero */

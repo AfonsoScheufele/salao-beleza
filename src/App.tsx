@@ -8,10 +8,12 @@ import { Agendamento } from './components/Agendamento'
 import { Localizacao } from './components/Localizacao'
 import { Footer } from './components/Footer'
 import { WhatsAppFloat } from './components/WhatsAppFloat'
+import { Seo } from './components/Seo'
 
 export default function App() {
   return (
     <>
+      <Seo />
       <Header />
       <main>
         <Hero />

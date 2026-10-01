@@ -3,7 +3,7 @@
   inset: 0 0 auto;
   z-index: 40;
   height: var(--header-h);
-  transition: background 0.25s ease, box-shadow 0.25s ease, backdrop-filter 0.25s ease;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
   color: #fff;
 }
 
@@ -16,11 +16,30 @@
   background: #fff;
 }
 
+/* Links claros sobre o hero escuro (desktop) */
+.header:not(.scrolled) .navDesktop .link {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.header:not(.scrolled) .navDesktop .link:hover {
+  color: #fff;
+}
+
 .scrolled {
-  background: rgba(250, 246, 247, 0.88);
-  backdrop-filter: blur(12px);
+  background: rgba(250, 246, 247, 0.92);
   box-shadow: 0 1px 0 var(--color-border);
   color: var(--color-ink);
+}
+
+/* Blur em camada própria — não prende descendants position:fixed */
+.scrolled::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
 }
 
 .scrolled .brand {
@@ -32,7 +51,31 @@
   background: var(--color-ink);
 }
 
+/* Menu aberto: barra + X acima do overlay (senão o nav cobre o botão) */
+.menuOpen {
+  z-index: 60;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  box-shadow: none;
+}
+
+.menuOpen::before {
+  display: none;
+}
+
+.menuOpen .brand {
+  color: var(--color-ink);
+  text-shadow: none;
+}
+
+.menuOpen .burger span {
+  background: var(--color-ink);
+  height: 2.5px;
+}
+
 .inner {
+  position: relative;
+  z-index: 2;
   max-width: var(--max);
   margin: 0 auto;
   height: 100%;
@@ -53,12 +96,16 @@
 .burger {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
   background: none;
   border: none;
-  padding: 0.4rem;
+  padding: 0;
+  min-width: 44px;
+  min-height: 44px;
   cursor: pointer;
-  z-index: 2;
+  z-index: 60;
 }
 
 .burger span {
@@ -66,46 +113,94 @@
   width: 22px;
   height: 2px;
   background: var(--color-ink);
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  transform-origin: center;
 }
 
-.nav {
+/* Burger → X */
+.burgerOpen span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burgerOpen span:nth-child(2) {
+  opacity: 0;
+}
+
+.burgerOpen span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Desktop: nav na barra */
+.navDesktop {
   display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(250, 246, 247, 0.97);
+}
+
+/* Mobile: overlay fullscreen fora do header (abaixo do header/X) */
+.navMobile {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.25rem;
-  padding: var(--space-xl);
+  gap: 1.35rem;
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  padding: calc(var(--header-h) + var(--space-lg)) var(--space-xl) var(--space-xl);
+  background: var(--color-bg);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-0.5rem);
+  transition:
+    opacity 0.22s ease,
+    visibility 0.22s ease,
+    transform 0.22s ease;
+  cursor: pointer;
 }
 
-.navOpen {
+.navMobileOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.navPanel {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+  cursor: default;
 }
 
-/* Menu aberto: texto escuro sobre fundo claro, mesmo no topo do hero */
-.header:has(.navOpen) {
-  color: var(--color-ink);
+.closeHint {
+  margin-top: 0.25rem;
+  padding: 0.55rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--color-ink-muted);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
 }
 
-.header:has(.navOpen) .brand {
-  color: var(--color-ink);
-  text-shadow: none;
-}
-
-.header:has(.navOpen) .burger span {
-  background: var(--color-ink);
+.closeHint:hover,
+.closeHint:focus-visible {
+  color: var(--color-blush-deep);
+  outline: none;
 }
 
 .link {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   color: var(--color-ink-muted);
   font-weight: 500;
 }
 
-.link:hover {
+.navMobile .link:hover,
+.navMobile .link:focus-visible {
   color: var(--color-blush-deep);
 }
 
@@ -118,20 +213,31 @@
     display: none;
   }
 
-  .nav {
+  .navMobile {
+    display: none;
+  }
+
+  .navDesktop {
     display: flex;
     position: static;
-    inset: auto;
-    background: transparent;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
     gap: 1.1rem;
     padding: 0;
+    background: transparent;
   }
 
-  .link {
+  .navDesktop .link {
     font-size: 0.92rem;
+  }
+
+  .navDesktop .link:hover {
+    color: var(--color-blush-deep);
+  }
+
+  .scrolled .navDesktop .link {
+    color: var(--color-ink-muted);
   }
 
   .cta {

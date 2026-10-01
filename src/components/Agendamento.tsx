@@ -47,11 +47,14 @@ export function Agendamento() {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpenSelect(false)
     }
+    const onScroll = () => setOpenSelect(false)
     document.addEventListener('mousedown', onPointer)
     document.addEventListener('keydown', onKey)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       document.removeEventListener('mousedown', onPointer)
       document.removeEventListener('keydown', onKey)
+      window.removeEventListener('scroll', onScroll)
     }
   }, [openSelect])
 
@@ -87,7 +90,7 @@ export function Agendamento() {
   return (
     <section id="agendamento" className={`section ${styles.agendamento}`} ref={ref}>
       <div className="section__inner">
-        <p className="section__eyebrow">Horários</p>
+        <p className="section__eyebrow">Reserve</p>
         <h2 className="section__title">Agendamento</h2>
         <p className="section__lead">
           Preencha e envie pelo WhatsApp — respondemos para confirmar o melhor horário.
